@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:travel_app/shared/theme.dart';
+import 'package:travel_app/ui/pages/checkout_page.dart';
+import 'package:travel_app/ui/pages/widgets/custom_button.dart';
 import 'package:travel_app/ui/pages/widgets/seat_item.dart';
 
 class ChooseSeatPage extends StatelessWidget {
@@ -91,7 +92,7 @@ class ChooseSeatPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: 48,
                   height: 48,
                   child: Center(
@@ -104,7 +105,7 @@ class ChooseSeatPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 48,
                   height: 48,
                   child: Center(
@@ -117,7 +118,7 @@ class ChooseSeatPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 48,
                   height: 48,
                   child: Center(
@@ -130,7 +131,7 @@ class ChooseSeatPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 48,
                   height: 48,
                   child: Center(
@@ -143,7 +144,7 @@ class ChooseSeatPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 48,
                   height: 48,
                   child: Center(
@@ -296,7 +297,7 @@ class ChooseSeatPage extends StatelessWidget {
             ),
             //NOTE YOUR SEAT
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 30,
               ),
               child: Row(
@@ -316,7 +317,7 @@ class ChooseSeatPage extends StatelessWidget {
             ),
             // NOTE TOTAL
             Container(
-              margin: EdgeInsets.only(top: 16),
+              margin: const EdgeInsets.only(top: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -337,6 +338,23 @@ class ChooseSeatPage extends StatelessWidget {
       );
     }
 
+    Widget checkoutButton() {
+      return CustomButton(
+        title: 'Continue to Checkout',
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CheckoutPage(),
+              ));
+        },
+        margin: const EdgeInsets.only(
+          top: 30,
+          bottom: 6,
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: ListView(
@@ -347,6 +365,7 @@ class ChooseSeatPage extends StatelessWidget {
           title(),
           seatStatus(),
           selectSeat(),
+          checkoutButton(),
         ],
       ),
     );

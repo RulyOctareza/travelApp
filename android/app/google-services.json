@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942865886793",
+    "project_id": "travelapp-d7fdd",
+    "storage_bucket": "travelapp-d7fdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942865886793:android:23a7cc906a0ba7da985998",
+        "android_client_info": {
+          "package_name": "com.rulyoctareza.travel_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwNdOVppRuv0KrJO7rbTlCfEducoODIyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

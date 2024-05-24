@@ -93,8 +93,7 @@ class DetailPage extends StatelessWidget {
                             const EdgeInsets.only(right: 5, bottom: 6, left: 6),
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    const AssetImage('assets/icon_star.png'))),
+                                image: AssetImage('assets/icon_star.png'))),
                       ),
                       Text(
                         '4.8',
