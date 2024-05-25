@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_app/cubit/auth_cubit.dart';
 import 'package:travel_app/ui/pages/widgets/custom_button.dart';
 import 'package:travel_app/ui/pages/widgets/custom_text_form_field.dart';
 import '../../shared/theme.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController(text: '');
+
+  TextEditingController emailController = TextEditingController(text: '');
+
+  TextEditingController passwordController = TextEditingController(text: '');
+
+  TextEditingController hobbyController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -23,34 +38,70 @@ class SignUpPage extends StatelessWidget {
 
     Widget inputSection() {
       Widget nameInput() {
-        return const CustomTextFormField(
-            title: 'Full Name', hintText: 'Your Full Name');
+        return CustomTextFormField(
+          title: 'Full Name',
+          hintText: 'Your Full Name',
+          controller: nameController,
+        );
       }
 
       Widget emailInput() {
-        return const CustomTextFormField(
-            title: 'Email Address', hintText: 'Your Email Address');
+        return CustomTextFormField(
+          title: 'Email Address',
+          hintText: 'Your Email Address',
+          controller: emailController,
+        );
       }
 
       Widget passwordInput() {
-        return const CustomTextFormField(
+        return CustomTextFormField(
           title: 'Password',
           hintText: 'Your Password',
           obscureText: true,
+          controller: passwordController,
         );
       }
 
       Widget hobbyInput() {
-        return const CustomTextFormField(
-            title: 'Hobby', hintText: 'Your Hobby');
+        return CustomTextFormField(
+            controller: hobbyController,
+            title: 'Hobby',
+            hintText: 'Your Hobby');
       }
 
       Widget submitButton() {
-        return CustomButton(
-            title: 'Get Started',
-            onPressed: () {
-              Navigator.pushNamed(context, '/bonus');
-            });
+        return BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthSuccess) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/bonus', (route) => false);
+            } else if (state is AuthFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: kRedColor,
+                  content: Text(state.error),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return CustomButton(
+                title: 'Get Started',
+                onPressed: () {
+                  context.read<AuthCubit>().signUp(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      name: nameController.text,
+                      hobby: hobbyController.text);
+                });
+          },
+        );
       }
 
       return Container(

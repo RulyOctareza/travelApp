@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:travel_app/shared/theme.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String title;
   final String hintText;
   final bool obscureText;
+  final TextEditingController controller;
 
   const CustomTextFormField({
     super.key,
     required this.title,
     required this.hintText,
     this.obscureText = false,
+    required this.controller,
   });
 
   @override
