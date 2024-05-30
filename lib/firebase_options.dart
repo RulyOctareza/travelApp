@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -54,9 +42,46 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAwNdOVppRuv0KrJO7rbTlCfEducoODIyI',
-    appId: '1:942865886793:android:23a7cc906a0ba7da985998',
+    appId: '1:942865886793:android:69af9a8c48a1ffcd985998',
     messagingSenderId: '942865886793',
     projectId: 'travelapp-d7fdd',
     storageBucket: 'travelapp-d7fdd.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBmEgPps4zTMhNUnbEVtk-6-smdCm1k2qc',
+    appId: '1:942865886793:web:470ca538fca373ec985998',
+    messagingSenderId: '942865886793',
+    projectId: 'travelapp-d7fdd',
+    authDomain: 'travelapp-d7fdd.firebaseapp.com',
+    storageBucket: 'travelapp-d7fdd.appspot.com',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD2Ox4fJwm3J9MsOxTBE3OlfHATtoo_gsI',
+    appId: '1:942865886793:ios:4f70a8f3b744da8f985998',
+    messagingSenderId: '942865886793',
+    projectId: 'travelapp-d7fdd',
+    storageBucket: 'travelapp-d7fdd.appspot.com',
+    iosBundleId: 'com.example.travelApp',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyD2Ox4fJwm3J9MsOxTBE3OlfHATtoo_gsI',
+    appId: '1:942865886793:ios:4f70a8f3b744da8f985998',
+    messagingSenderId: '942865886793',
+    projectId: 'travelapp-d7fdd',
+    storageBucket: 'travelapp-d7fdd.appspot.com',
+    iosBundleId: 'com.example.travelApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBmEgPps4zTMhNUnbEVtk-6-smdCm1k2qc',
+    appId: '1:942865886793:web:f1bf5a4d2946acb9985998',
+    messagingSenderId: '942865886793',
+    projectId: 'travelapp-d7fdd',
+    authDomain: 'travelapp-d7fdd.firebaseapp.com',
+    storageBucket: 'travelapp-d7fdd.appspot.com',
+  );
+
 }

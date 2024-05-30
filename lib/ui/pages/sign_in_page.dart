@@ -5,27 +5,23 @@ import 'package:travel_app/ui/pages/widgets/custom_button.dart';
 import 'package:travel_app/ui/pages/widgets/custom_text_form_field.dart';
 import '../../shared/theme.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController(text: '');
   final TextEditingController emailController = TextEditingController(text: '');
   final TextEditingController passwordController =
       TextEditingController(text: '');
-  final TextEditingController hobbyController = TextEditingController(text: '');
 
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    hobbyController.dispose();
     super.dispose();
   }
 
@@ -33,8 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/bonus', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
         } else if (state is AuthFailed) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -52,14 +47,12 @@ class _SignUpPageState extends State<SignUpPage> {
         }
 
         return CustomButton(
-          title: 'Get Started',
+          title: 'Sign In',
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              context.read<AuthCubit>().signUp(
+              context.read<AuthCubit>().signIn(
                     email: emailController.text,
                     password: passwordController.text,
-                    name: nameController.text,
-                    hobby: hobbyController.text,
                   );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -80,31 +73,19 @@ class _SignUpPageState extends State<SignUpPage> {
     Widget title() {
       return Container(
         margin: const EdgeInsets.only(top: 30),
-        child: Text(
-          'Join us and get \nyour next journey',
-          style: blackTextStyle.copyWith(
-            fontSize: 24,
-            fontWeight: semiBold,
+        child: Center(
+          child: Text(
+            'Sign In with your\nexisting account',
+            style: blackTextStyle.copyWith(
+              fontSize: 24,
+              fontWeight: semiBold,
+            ),
           ),
         ),
       );
     }
 
     Widget inputSection() {
-      Widget nameInput() {
-        return CustomTextFormField(
-          title: 'Full Name',
-          hintText: 'Your Full Name',
-          controller: nameController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Full Name cannot be empty';
-            }
-            return null;
-          },
-        );
-      }
-
       Widget emailInput() {
         return CustomTextFormField(
           title: 'Email Address',
@@ -129,23 +110,6 @@ class _SignUpPageState extends State<SignUpPage> {
             if (value == null || value.isEmpty) {
               return 'Password cannot be empty';
             }
-            if (value.length < 6) {
-              return 'Password should be at least 6 character';
-            }
-            return null;
-          },
-        );
-      }
-
-      Widget hobbyInput() {
-        return CustomTextFormField(
-          controller: hobbyController,
-          title: 'Hobby',
-          hintText: 'Your Hobby',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Hobby cannot be empty';
-            }
             return null;
           },
         );
@@ -167,10 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           child: Column(
             children: [
-              nameInput(),
               emailInput(),
               passwordInput(),
-              hobbyInput(),
               submitButton(),
             ],
           ),
@@ -178,19 +140,19 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
-    Widget signInButton() {
+    Widget tacButton() {
       return GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/sign-in');
+          Navigator.pushNamed(context, '/sign-up');
         },
         child: Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 50,
             bottom: 73,
           ),
           child: Text(
-            'Have an account? Sign In',
+            'Don\'t have an account? Sign Up',
             style: greyTextStyle.copyWith(
               fontSize: 16,
               fontWeight: light,
@@ -211,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             title(),
             inputSection(),
-            signInButton(),
+            tacButton(),
           ],
         ),
       ),

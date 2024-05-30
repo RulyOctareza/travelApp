@@ -7,6 +7,7 @@ import 'package:travel_app/firebase_options.dart';
 import 'package:travel_app/ui/pages/bonus_page.dart';
 import 'package:travel_app/ui/pages/get_started_page.dart';
 import 'package:travel_app/ui/pages/main_page.dart';
+import 'package:travel_app/ui/pages/sign_in_page.dart';
 import 'package:travel_app/ui/pages/sign_up_page.dart';
 import 'package:travel_app/ui/pages/splash_page.dart';
 
@@ -43,7 +44,8 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/': (context) => const SplashPage(),
           '/get-started': (context) => const GetStartedPage(),
-          '/sign-up': (context) => SignUpPage(),
+          '/sign-up': (context) => const SignUpPage(),
+          '/sign-in': (context) => const SignInPage(),
           '/bonus': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
         },
