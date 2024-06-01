@@ -1,19 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:travel_app/models/destination_model.dart';
 import 'package:travel_app/shared/theme.dart';
 import 'package:travel_app/ui/pages/detail_page.dart';
 
 class DestinationCard extends StatelessWidget {
-  final String cityDestination;
-  final String nameDestination;
-  final String imageUrl;
-  final String rating;
+  final DestinationModel destination;
 
   const DestinationCard({
     super.key,
-    required this.cityDestination,
-    required this.nameDestination,
-    required this.imageUrl,
-    required this.rating,
+    required this.destination,
   });
 
   @override
@@ -23,7 +20,9 @@ class DestinationCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(),
+            builder: (context) => DetailPage(
+              destination: destination,
+            ),
           ),
         );
       },
@@ -48,8 +47,8 @@ class DestinationCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                  image: AssetImage(
-                    imageUrl,
+                  image: NetworkImage(
+                    destination.imageUrl,
                   ),
                 ),
               ),
@@ -73,11 +72,10 @@ class DestinationCard extends StatelessWidget {
                             const EdgeInsets.only(right: 5, bottom: 6, left: 6),
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    const AssetImage('assets/icon_star.png'))),
+                                image: AssetImage('assets/icon_star.png'))),
                       ),
                       Text(
-                        rating.toString(),
+                        destination.rating.toString(),
                         style: blackTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -90,7 +88,7 @@ class DestinationCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 10),
               child: Text(
-                nameDestination,
+                destination.name,
                 style: blackTextStyle.copyWith(
                   fontSize: 18,
                   fontWeight: medium,
@@ -104,7 +102,7 @@ class DestinationCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 10),
               child: Text(
-                cityDestination,
+                destination.city,
                 style: greyTextStyle.copyWith(
                   fontSize: 12,
                   fontWeight: light,
