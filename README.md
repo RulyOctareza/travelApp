@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/preview/hero.png" alt="Travel App — ilustrasi aplikasi pemesanan perjalanan" width="100%">
+  <img src="docs/preview/hero.svg" alt="Travel App — ilustrasi aplikasi pemesanan perjalanan" width="100%">
 </p>
 
 <h1 align="center">Travel App</h1>
